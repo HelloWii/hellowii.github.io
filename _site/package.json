@@ -1,0 +1,18 @@
+{
+  "name": "hellowii.github.io",
+  "version": "1.0.0",
+  "description": "HeloWii",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://hellowii.github.io.git"
+  },
+  "author": "hellowii",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://hellowii.github.io/issues"
+  },
+  "homepage": "https://hellowii.github.io",
+}

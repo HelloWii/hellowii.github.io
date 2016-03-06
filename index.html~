@@ -1,0 +1,19 @@
+---
+layout: default 
+---      
+<div class="container">
+<div class="home">
+    <div class="banner">
+        <div class="banner-text">
+            <h1 class="headline"><span>HelloWii</span></h1>
+            	<br>
+            <h3><font color="#FF00CC">发现是一门艺术</font></h3>
+		<br>
+            <h3><font>分享铸就美好未来</font></h3>
+            <ul class="social">
+                <li><a href="https://github.com/{{ site.name }}"><i class="icon-github"></i></a></li>
+            </ul>
+        </div>
+    </div>              
+</div>
+</div>

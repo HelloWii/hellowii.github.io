@@ -1,0 +1,9 @@
+<!-- FOOTER -->
+<div class="footer" >
+    <p class="copyright">
+       	&copy; 
+        <span itemprop="copyrightYear">{{ site.time | date: '%Y' }}</span> 
+        <span itemprop="name">&nbsp;{{ site.name }}&nbsp;&nbsp;&nbsp;QQ:574433742</span>
+	<br>
+    </p>
+</div>

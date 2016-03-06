@@ -1,0 +1,14 @@
+---
+layout: default 
+---      
+
+<div class="lab">
+	<div class="element"></div>
+	<div class="element"></div>
+	<div class="element"margin-left: auto;margin-right: auto;></div>
+	<div class="element"></div>
+</div>
+
+<script src="../statics/js/waterfall.js" defer></script>
+
+ 
