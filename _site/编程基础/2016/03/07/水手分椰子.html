@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>HelloWii的小窝</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//libs.cncdn.cn/highlight.js/8.4/styles/tomorrow.min.css">
+    <script src="//libs.cncdn.cn/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- CSS -->                       
+    <link rel="stylesheet" href="/statics/css/index.css">
+</head>
+
+<body>
+    
+    <div class="wrap">          
+    <!--HEADER-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?b69fc87384d967f73ccfbcffb2995a83";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<div class="header">
+    <div class="logo"> <a href="/index.html"><img src="/images/logo.png" alt=""></a> </div>
+    <div class="cssmenu">
+        <ul>
+            <li><a href="/index.html">HOME</a></li>       
+            <li><a href="/blog/">BLOG</a></li>
+            <li><a href="/lab/">LAB</a></li>
+            <li><a href="/about/">ABOUT</a></li>
+            <li><a href="http://hellowii.github.io">git</a></li>
+        </ul>
+    </div>
+    <div class="top-nav">
+        <nav class="clearfix">
+            <ul>
+                <li><a href="/index.html">HOME</a></li>
+                <li><a href="/blog/">BLOG</a></li>
+                <li><a href="/lab/">LAB</a></li>
+                <li><a href="/about/">ABOUT</a></li>
+                <li><a href="http://hellowii.github.io/cv/">git</a></li>
+            </ul>
+        <a href="#" id="pull">MENU</a> 
+        </nav>
+    </div>
+</div>
+    
+        <div id="container">
+    <div class="content">
+        <div class="page">
+            <div class="post-content">
+    <div class="title"><h1>水手分椰子</h1></div>
+    <p class="post-date">Mar 7, 2016</p>
+                    
+     <p>水手分椰子</p>
+
+<hr />
+
+<ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">题目：水手分椰子</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">问题描述</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">问题分析</a>    <ul>
+      <li><a href="#sum" id="markdown-toc-sum">（1）假设椰子的总量为sum</a></li>
+      <li><a href="#n-" id="markdown-toc-n-">（2） 假设最后一次分到的椰子的个数为 n 个</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="section">题目：水手分椰子</h3>
+
+<h3 id="section-1">问题描述</h3>
+
+<pre><code>水手分椰子：
+有五个水手带一只猴子来到一个岛上，发现那里有一大堆椰子。由于旅途的颠簸，大家都很疲倦，很快就入睡了。第一个水手醒来，把叶子分成五堆，将多余的一个分给猴子，他藏起一堆便又去睡了。其他水手后来也陆续起来，把见到的椰子和第一个水手一样重新分成五堆，把多余的一个给猴子，自己藏起一堆，又去入睡了。
+天亮之后大家，把余下的椰子重新分成五堆；每人一堆，恰好余下一个又给了猴子。
+求原先有多少个椰子（椰子总数小于10000）。
+</code></pre>
+
+<h3 id="section-2">问题分析</h3>
+
+<h4 id="sum">（1）假设椰子的总量为sum</h4>
+
+<p>第一个水手分完之后的剩下的椰子个数为：<code>sum1 = （（sum-1）/5）*4</code></p>
+
+<p>第二个水手分完之后的剩下的椰子个数为：<code>sum2 = （（sum-2）/5）*4</code></p>
+
+<p>……</p>
+
+<p>第五个水手分完之后，每一堆为： <code>（sum4-1）/5</code></p>
+
+<p>简单的代码如下：</p>
+
+<pre><code>#include&lt;stdio.h&gt;
+#define DIV_TIMES 5   //水手的数目，即分几次椰子
+#define SUM  10000    //椰子数目范围
+int main()
+{
+  int sum = 5;
+  int count = 1;
+  int temp = 0;
+  while(sum &lt;= SUM)
+  {
+    temp = sum;
+    count = 1;
+    if(DIV_TIMES == 1)
+    {
+        if((temp-1)%5 == 0)
+            printf("%d\n",sum);
+    }
+    else
+    {
+        while(count &lt;= DIV_TIMES)
+        {   
+            if((temp-1)%5 == 0)
+            {
+              temp = ((temp-1)/5)*4;
+              count++;
+              if(count == (DIV_TIMES))
+              {
+                if((temp-1)%5 == 0)
+                    printf("%d\n",sum);
+                count ++;
+              }
+            }else
+            {
+              count = 1;
+              break;
+            }
+        }
+    }
+    sum++;
+  }
+
+  return 0;
+}
+</code></pre>
+
+<h4 id="n-">（2） 假设最后一次分到的椰子的个数为 n 个</h4>
+
+<p>则第五个人要分的时候应该有 <code>a1 =  5n+1</code> 个椰子</p>
+
+<p>第四个人要分的时候椰子应该有 <code>a2= （（a1/4）*5+1）</code> 个椰子</p>
+
+<p>第三个人要分的时候椰子应该有 <code>a3= （（a2/4）*5+1）</code> 个椰子</p>
+
+<p>题目就简化成了对一个函数的递归调用。关键是要做是否能被整除的判断。</p>
+
+<pre><code>#include&lt;stdio.h&gt;
+#define SUB  1000;    //最后一次每个人手里分得的椰子。
+
+int coconut(int a)
+{
+
+   if(a%4 == 0)
+   {
+       //printf("   coconut=%d\n",((a/4)*5 + 1));
+       return ((a/4)*5 + 1);
+   }
+    return 0;
+}
+
+int slove(int i)
+{
+   int n = 0;
+   int sum = 5*i+1;
+   int tmp = 0;
+   tmp = sum;
+   while(n&lt;4)
+   {
+     sum = coconut(sum);
+     if(sum == 0 )
+     {
+        return 0;
+     }
+     n++;
+   }
+   return sum;
+}
+
+
+int main()
+{
+  //printf("%d",coconut(1,1));
+  int i = 1;
+  int result = 0;
+  while(i &lt; SUB)
+  {
+       result = slove(i);
+       if(result != 0)
+       {
+          printf("%d\n",result);
+       }
+       i++;
+  }
+  return 0;
+}
+</code></pre>
+
+
+                    
+    <ul class="pagination">
+        
+        <li class="previous">
+            <a href="/ui%E7%9B%B8%E5%85%B3/2016/03/06/Markdown%20%E8%AF%AD%E6%B3%95%E5%85%A5%E9%97%A8.html">Previous</a>
+        </li>
+        
+        
+    </ul>
+</div>
+
+            
+
+<div class="catalog-menu">
+    <h3>目&nbsp;&nbsp;录</h3>
+    <div class="catalog-menu-content"></div>
+</div>
+
+
+<div class="comment">
+    <span>Comments</span>
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/2016/03/07/水手分椰子" data-title="水手分椰子" data-url="hellowii.github.io/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/2016/03/07/%E6%B0%B4%E6%89%8B%E5%88%86%E6%A4%B0%E5%AD%90.html"></div>
+    <!-- 多说评论框 end -->
+</div>
+
+
+
+                   
+        </div>       
+        
+    </div>
+</div>
+
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"hellowii"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+    
+        <!--回到顶部-->
+        <a id="returnTop"></a>
+
+    <!-- FOOTER -->
+<div class="footer" >
+    <p class="copyright">
+       	&copy; 
+        <span itemprop="copyrightYear">2016</span> 
+        <span itemprop="name">&nbsp;HelloWii&nbsp;&nbsp;&nbsp;QQ:574433742</span>
+	<br><br>
+    </p>
+</div>
+
+    </div>
+
+    <script src="/statics/js/jquery.min.js"></script>
+    <script src="/statics/js/index.js"></script>
+    
+
+</body>
+</html>
