@@ -66,19 +66,18 @@ var _hmt = _hmt || [];
 <hr />
 
 <ul id="markdown-toc">
-  <li><a href="#cca80" id="markdown-toc-cca80">CCA80</a>    <ul>
-      <li><a href="#a80" id="markdown-toc-a80">A80芯片简介</a></li>
-    </ul>
-  </li>
+  <li><a href="#a80" id="markdown-toc-a80">A80芯片简介</a></li>
   <li><a href="#section" id="markdown-toc-section">系统烧写</a></li>
   <li><a href="#section-1" id="markdown-toc-section-1">远程登录</a></li>
   <li><a href="#opencv" id="markdown-toc-opencv">安装 openCV</a></li>
   <li><a href="#opencv-" id="markdown-toc-opencv-">openCV 读取图片</a>    <ul>
+      <li><a href="#section-2" id="markdown-toc-section-2">新建工作目录</a></li>
+      <li><a href="#cpp-" id="markdown-toc-cpp-">新建 cpp 文件</a></li>
       <li><a href="#cmake-cmakeliststxt" id="markdown-toc-cmake-cmakeliststxt">编写 Cmake 文件（CMakeLists.txt）</a></li>
     </ul>
   </li>
   <li><a href="#opencv--1" id="markdown-toc-opencv--1">openCV 读取摄像头</a>    <ul>
-      <li><a href="#cpp-" id="markdown-toc-cpp-">编写 cpp 文件</a></li>
+      <li><a href="#cpp--1" id="markdown-toc-cpp--1">编写 cpp 文件</a></li>
       <li><a href="#ps---httpbbsickeycn--cca80-" id="markdown-toc-ps---httpbbsickeycn--cca80-">PS: 感谢 云汉芯城 <a href="http://bbs.ickey.cn">社区论坛</a> 提供的 CCA80 开发板</a></li>
     </ul>
   </li>
@@ -88,7 +87,8 @@ var _hmt = _hmt || [];
 软件环境： Win7   win32DiskImageWrite mobaXterm
 </code></pre>
 
-<h3 id="cca80">CCA80</h3>
+<p>CCA80</p>
+
 <p>CCA80是方糖电子的一块以全志A80为核心的开发板。
 <img src="http://7xrdfh.com1.z0.glb.clouddn.com/%40%2Fblog%2Focv2016-03-22-a80-cca80.png-HelloWii" alt="CCA80" />
 从上面可以看出来，板卡的资源h还是蛮丰富的，实际使用中，虽然A80采用的bigLITTLE, 发热量也是不敢恭维，不过板子跑ubuntu和android还是相当流畅的。
@@ -162,11 +162,14 @@ terminate called after throwing an instance of 'cv::Exception'`
 
 <h3 id="opencv-">openCV 读取图片</h3>
 
-<p>下面这个例子，熟悉cmake 使用 openCV 显示一副图像：
-####新建工作目录
-新建文件夹，名字随意，本文中使用的是 <code>cv_img</code>
-找一副图像放入 <code>cv_img</code> 文件夹中。建议不要太大。
-####新建 cpp 文件</p>
+<p>下面这个例子，熟悉cmake 使用 openCV 显示一副图像：</p>
+
+<h4 id="section-2">新建工作目录</h4>
+
+<p>新建文件夹，名字随意，本文中使用的是 <code>cv_img</code>
+找一副图像放入 <code>cv_img</code> 文件夹中。建议不要太大。</p>
+
+<h4 id="cpp-">新建 cpp 文件</h4>
 
 <pre><code>//main.cpp
 #include &lt;stdio.h&gt;
@@ -214,7 +217,7 @@ $./mian yourimage
 
 <p>如果USB摄像头连接上，在<code>/dev</code>目录下不能看到 <code>vide0</code>  很肯能USB 摄像头不能被识别，需要自己去找驱动。</p>
 
-<h4 id="cpp-">编写 cpp 文件</h4>
+<h4 id="cpp--1">编写 cpp 文件</h4>
 <p>可以将上个历程中的 main.cpp 文件中的内容替换如下：</p>
 
 <pre><code>#include &lt;opencv2/opencv.hpp&gt;
