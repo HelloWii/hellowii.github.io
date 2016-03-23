@@ -1,0 +1,68 @@
+---
+layout: post
+title:  "Cmake 简介"
+date:  2016-03-22
+categories: 编程基础
+---
+
+* content
+{:toc}
+
+###Cmake
+[Cmake](https://cmake.org/)是一个跨平台的安装(编译)工具,可以用简单的语句来描述所有平台的安装(编译过程)。他能够输出各种各样的makefile或者project文件,能测试编译器所支持的C++特性,类似UNIX下的automake。
+ubuntu 安装：
+	#apt-get install cmake
+在Terminal中输入：
+
+	$cmake -version
+
+既可以看到版本信息。
+
+###Helloworld
+
+####首先新建一个 `main.cpp` 程序
+
+{% highlight bash linenos %}
+
+#include<iostream> 
+int main()
+{
+    std::cout<<"Hello word!"<<std::endl;
+    return 0;
+}
+
+{% endhighlight %}
+
+####建立CMakeLists.txt
+Cmake 所有的语句都卸在这个文件中。
+
+{% highlight bash linenos %}
+
+PROJECT(main)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+AUX_SOURCE_DIRECTORY(. DIR_SRCS)
+ADD_EXECUTABLE(main ${DIR_SRCS})
+
+{% endhighlight %}
+
+CMakeLists.txt 的语法比较简单,由命令、注释和空格组成,其中命令是不区分大小写的。
+符号"#"后面的内容被认为是注释。命令由命令名称、小括号和参数组成,参数之间使用空格进行间隔。
+上面的文件中第一行是一条命令,名称是 PROJECT ,参数是 main ,该命令表示项目的名称是 main 。第二行的命令限定了 CMake 的版本。
+第三行使用命令 AUX_SOURCE_DIRECTORY 将当前目录中的源文件名称赋值给变量 DIR_SRCS 。
+
+####Cmake 的使用方法：
+
+    $cmake 
+    $make
+
+其中 cmake 后面 空格 + '.’  点表示当前的目录，也可以配置成别的目录。（如果 `#cmake .` 执行错误的时候，在前面加一句`$ccmake .`）
+
+以上面的Hellworld 例子：
+
+    $cmake .
+    $make 
+    $./main
+    
+既可以执行，看到`HelloWorld`
+
+上面只是简单的介绍了一下 cmake 。

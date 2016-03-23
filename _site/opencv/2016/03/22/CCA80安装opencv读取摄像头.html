@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>HelloWii的小窝</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//libs.cncdn.cn/highlight.js/8.4/styles/tomorrow.min.css">
+    <script src="//libs.cncdn.cn/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- CSS -->                       
+    <link rel="stylesheet" href="/statics/css/index.css">
+</head>
+
+<body>
+    
+    <div class="wrap">          
+    <!--HEADER-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?b69fc87384d967f73ccfbcffb2995a83";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<div class="header">
+    <div class="logo"> <a href="/index.html"><img src="/images/logo.png" alt=""></a> </div>
+    <div class="cssmenu">
+        <ul>
+            <li><a href="/index.html">HOME</a></li>       
+            <li><a href="/blog/">BLOG</a></li>
+            <li><a href="/lab/">LAB</a></li>
+            <li><a href="/about/">ABOUT</a></li>
+            <li><a href="http://hellowii.github.io">git</a></li>
+        </ul>
+    </div>
+    <div class="top-nav">
+        <nav class="clearfix">
+            <ul>
+                <li><a href="/index.html">HOME</a></li>
+                <li><a href="/blog/">BLOG</a></li>
+                <li><a href="/lab/">LAB</a></li>
+                <li><a href="/about/">ABOUT</a></li>
+                <li><a href="http://hellowii.github.io/cv/">git</a></li>
+            </ul>
+        <a href="#" id="pull">MENU</a> 
+        </nav>
+    </div>
+</div>
+    
+        <div id="container">
+    <div class="content">
+        <div class="page">
+            <div class="post-content">
+    <div class="title"><h1>CCA80安装openCV读取摄像头</h1></div>
+    <p class="post-date">Mar 22, 2016</p>
+                    
+     <p>CCA80安装openCV读取摄像头</p>
+
+<hr />
+
+<ul id="markdown-toc">
+  <li><a href="#cca80" id="markdown-toc-cca80">CCA80</a>    <ul>
+      <li><a href="#a80" id="markdown-toc-a80">A80芯片简介</a></li>
+    </ul>
+  </li>
+  <li><a href="#section" id="markdown-toc-section">系统烧写</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">远程登录</a></li>
+  <li><a href="#opencv" id="markdown-toc-opencv">安装 openCV</a></li>
+  <li><a href="#opencv-" id="markdown-toc-opencv-">openCV 读取图片</a>    <ul>
+      <li><a href="#cmake-cmakeliststxt" id="markdown-toc-cmake-cmakeliststxt">编写 Cmake 文件（CMakeLists.txt）</a></li>
+    </ul>
+  </li>
+  <li><a href="#opencv--1" id="markdown-toc-opencv--1">openCV 读取摄像头</a>    <ul>
+      <li><a href="#cpp-" id="markdown-toc-cpp-">编写 cpp 文件</a></li>
+      <li><a href="#ps---httpbbsickeycn--cca80-" id="markdown-toc-ps---httpbbsickeycn--cca80-">PS: 感谢 云汉芯城 <a href="http://bbs.ickey.cn">社区论坛</a> 提供的 CCA80 开发板</a></li>
+    </ul>
+  </li>
+</ul>
+
+<pre><code>硬件环境： CCA80  USB-TTL USBCamera（文中使用的Camera主控是EtronTech sp268A6）
+软件环境： Win7   win32DiskImageWrite mobaXterm
+</code></pre>
+
+<h3 id="cca80">CCA80</h3>
+<p>CCA80是方糖电子的一块以全志A80为核心的开发板。
+<img src="http://7xrdfh.com1.z0.glb.clouddn.com/%40%2Fblog%2Focv2016-03-22-a80-cca80.png-HelloWii" alt="CCA80" />
+从上面可以看出来，板卡的资源h还是蛮丰富的，实际使用中，虽然A80采用的bigLITTLE, 发热量也是不敢恭维，不过板子跑ubuntu和android还是相当流畅的。
+<img src="http://7xrdfh.com1.z0.glb.clouddn.com/%40%2Fblog%2Focv2016-03-22-cca80all.png-HelloWii" alt="CCA80all" /></p>
+
+<h4 id="a80">A80芯片简介</h4>
+<p><img src="http://7xrdfh.com1.z0.glb.clouddn.com/%40%2Fblog%2Focv2016-03-22-a80-1.png-HelloWii" alt="A80-1" /></p>
+
+<p><img src="http://7xrdfh.com1.z0.glb.clouddn.com/%40%2Fblog%2Focv2016-03-22-a80-2.png-HelloWii" alt="A80-2" /></p>
+
+<h3 id="section">系统烧写</h3>
+
+<p>镜像分两种一个，从SD卡启动，另一个是通过SD 卡烧写到emmc。 既然，板卡，有emmc，就不浪费SD卡。
+首先，用Win32Imagewriter 将系统写如镜像。</p>
+
+<p>1）将制作好刷emmc的TF启动卡插入CC-A80的TF-CARD卡槽</p>
+
+<p>2）用官方标配的直流电源或者电池上电启动</p>
+
+<p>3）红色和绿色 LED 灯持续闪烁表示系统烧写正常</p>
+
+<p>4）如果量产过程出现异常，红色LED灯将会由闪烁变成长亮</p>
+
+<p>5）刷写完成后，红色和绿色LED 灯都熄灭,系统自动关机,烧写完成</p>
+
+<p>6)拔掉TF卡,进入下一步系统开机测试</p>
+
+<p>开发板插上网线，即可联网。</p>
+
+<p>本宝宝用的是串口登录，打开 mobaXteram 或者 SecureCRT 软件，设置 串口 波特率为 115200bit/s  8bit  无校验位。</p>
+
+<p>连接开发板，即可。将开发板连接到网络上。</p>
+
+<h3 id="section-1">远程登录</h3>
+
+<p>首先安装如下软件：</p>
+
+<pre><code># apt-get update
+# apt-get install xdrp
+# apt-get install vnc4server
+</code></pre>
+
+<p>在windows 中打开  mstsc.exe 文件 ，输入板块的IP地址，输入用户名和密码均为 linaro 进行登陆。
+以下的openCV实验都是在这个窗口进行的。（如果有显示器，那是更好了，可以直接介入CCA80,不用那么麻烦的远程登录了。）
+效果如下：
+<img src="http://7xrdfh.com1.z0.glb.clouddn.com/%40%2Fblog%2Focv2016-03-22-a80-3.png-HelloWii" alt="A80-3" /></p>
+
+<h3 id="opencv">安装 openCV</h3>
+<p>1、首先安装 <a href="http://www.hellowii.xyz/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/2016/03/22/cmake.html">Cmake</a>，关于<a href="http://www.hellowii.xyz/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/2016/03/22/cmake.html">Cmake</a> 可以参考这个<a href="http://www.hellowii.xyz/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/2016/03/22/cmake.html">文章</a>。
+2、安装libgtk2.0-dev  pkg-config</p>
+
+<pre><code># apt-get install libgtk2.0-dev
+# apt-get install pkg-config
+</code></pre>
+
+<p>不然后面会报错：</p>
+
+<pre><code>`OpenCV Error: Unspecified error (The function is not implemented. Rebuild the library with Windows, GTK+ 2.x or Carbon support. If you are on Ubuntu or Debian, install libgtk2.0-dev and pkg-config, then re-run cmake or configure script) in cvNamedWindow, file /usr/local/opencv/OpenCV-2.0.0/src/highgui/window.cpp, line 100
+terminate called after throwing an instance of 'cv::Exception'`
+</code></pre>
+
+<p>3、安装openCV</p>
+
+<p>去<a href="http://opencv.org/">openCV官网</a>下载openCV版本。本文中使用的是3.1.0。
+   unzip  解压之后，进入目录,依次执行如下指令。
+       #cmake .
+       #make
+       #make install</p>
+
+<p>至此安装完毕，make和make install 时间会有点久，请耐心的等待。</p>
+
+<h3 id="opencv-">openCV 读取图片</h3>
+
+<p>下面这个例子，熟悉cmake 使用 openCV 显示一副图像：
+####新建工作目录
+新建文件夹，名字随意，本文中使用的是 <code>cv_img</code>
+找一副图像放入 <code>cv_img</code> 文件夹中。建议不要太大。
+####新建 cpp 文件
+	//main.cpp
+    #include <stdio.h>
+    #include &lt;opencv2/opencv.hpp&gt;
+    using namespace cv;
+    int main(int argc, char** argv )
+    {
+      if ( argc != 2 )
+      {
+        printf("usage: main.out <picture file="" path="">\n");
+        return -1;
+      }
+      Mat image;
+      image = imread( argv[1], 1 );
+      if ( !image.data )
+      {
+        printf("No image data \n");
+        return -1;
+      }
+      namedWindow("widndow", WINDOW_AUTOSIZE );
+      imshow("window", image);
+      waitKey(0);
+      return 0;
+    }</picture></stdio.h></p>
+
+<h4 id="cmake-cmakeliststxt">编写 Cmake 文件（CMakeLists.txt）</h4>
+
+<pre><code>cmake_minimum_required(VERSION 2.8)
+project( main )
+find_package( OpenCV REQUIRED )
+add_executable( main main.cpp )
+target_link_libraries( main ${OpenCV_LIBS} ) ####运行
+
+$cmake .
+$make
+$./mian yourimage
+</code></pre>
+
+<h3 id="opencv--1">openCV 读取摄像头</h3>
+<p>将摄像头接到CCA80开发板中。本文中的USB显示信息如下。
+执行<code>$lsusb</code></p>
+
+<p><img src="http://7xrdfh.com1.z0.glb.clouddn.com/%40%2Fblog%2Focv2016-03-22-a80-usb.png-HelloWii" alt="USB-info" /></p>
+
+<p>如果USB摄像头连接上，在<code>/dev</code>目录下不能看到 <code>vide0</code>  很肯能USB 摄像头不能被识别，需要自己去找驱动。</p>
+
+<h4 id="cpp-">编写 cpp 文件</h4>
+<p>可以将上个历程中的 main.cpp 文件中的内容替换如下：</p>
+
+<pre><code>#include &lt;opencv2/opencv.hpp&gt;
+#include &lt;iostream&gt;
+
+using namespace cv;
+using namespace std;
+
+int main(int argc, char **argv)
+{
+    //打开视频文件
+    VideoCapture cap("Girls'Generation.avi");
+    if (!cap.isOpened())
+    {
+        cout &lt;&lt; "不能打开视频文件" &lt;&lt; endl;
+        return -1;
+    }
+    //从3000ms开始播放视频
+    //cap.set(CV_CAP_PROP_POS_MSEC, 3000);
+
+    //获取视频的帧速率
+    double fps = cap.get(CV_CAP_PROP_FPS);
+    cout &lt;&lt; "帧/秒：" &lt;&lt; fps &lt;&lt; endl;
+
+    namedWindow("MyVideo",CV_WINDOW_AUTOSIZE);
+    while (true)
+    {
+        Mat frame;
+        //从视频中读取一个帧
+        bool bSuccess = cap.read(frame);
+        if (!bSuccess)
+        {
+            cout &lt;&lt;"不能从视频文件读取帧"&lt;&lt; endl;
+            break;
+        }
+        //在MyVideo窗口上显示当前帧
+        imshow("MyVideo", frame);
+        //如果30ms没有按下键，就返回-1，当按下ESC键返回27
+        if (waitKey(30)==27)
+        {
+            cout &lt;&lt; "按下ESC键" &lt;&lt; endl;
+            break;
+        }
+    }
+
+    return 0;
+}
+</code></pre>
+
+<p>接着执行:</p>
+
+<pre><code>$cmake .
+$make
+$./mian yourimage
+</code></pre>
+
+<p>就可以在桌面上，看到摄像头显示了。效果如下：</p>
+
+<p><img src="http://7xrdfh.com1.z0.glb.clouddn.com/%40%2Fblog%2Focv2016-03-22-a80-camera.png-HelloWii" alt="USBcamera" /></p>
+
+<h4 id="ps---httpbbsickeycn--cca80-">PS: 感谢 云汉芯城 <a href="http://bbs.ickey.cn">社区论坛</a> 提供的 CCA80 开发板</h4>
+
+
+                    
+    <ul class="pagination">
+        
+        <li class="previous">
+            <a href="/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/2016/03/07/%E6%B0%B4%E6%89%8B%E5%88%86%E6%A4%B0%E5%AD%90.html">Previous</a>
+        </li>
+        
+        
+         <li class="next">
+            <a href="/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/2016/03/22/cmake.html">Next</a>
+        </li>
+        
+    </ul>
+</div>
+
+            
+
+<div class="catalog-menu">
+    <h3>目&nbsp;&nbsp;录</h3>
+    <div class="catalog-menu-content"></div>
+</div>
+
+
+<div class="comment">
+    <span>Comments</span>
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="/opencv/2016/03/22/CCA80安装opencv读取摄像头" data-title="CCA80安装openCV读取摄像头" data-url="hellowii.github.io/opencv/2016/03/22/CCA80%E5%AE%89%E8%A3%85opencv%E8%AF%BB%E5%8F%96%E6%91%84%E5%83%8F%E5%A4%B4.html"></div>
+    <!-- 多说评论框 end -->
+</div>
+
+
+
+                   
+        </div>       
+        
+    </div>
+</div>
+
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"hellowii"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+    
+        <!--回到顶部-->
+        <a id="returnTop"></a>
+
+    <!-- FOOTER -->
+<div class="footer" >
+    <p class="copyright">
+       	&copy; 
+        <span itemprop="copyrightYear">2016</span> 
+        <span itemprop="name">&nbsp;HelloWii&nbsp;&nbsp;&nbsp;QQ:574433742</span>
+	<br><br>
+    </p>
+</div>
+
+    </div>
+
+    <script src="/statics/js/jquery.min.js"></script>
+    <script src="/statics/js/index.js"></script>
+    
+
+</body>
+</html>
