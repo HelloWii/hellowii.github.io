@@ -166,30 +166,32 @@ terminate called after throwing an instance of 'cv::Exception'`
 ####新建工作目录
 新建文件夹，名字随意，本文中使用的是 <code>cv_img</code>
 找一副图像放入 <code>cv_img</code> 文件夹中。建议不要太大。
-####新建 cpp 文件
-	//main.cpp
-    #include <stdio.h>
-    #include &lt;opencv2/opencv.hpp&gt;
-    using namespace cv;
-    int main(int argc, char** argv )
-    {
-      if ( argc != 2 )
-      {
-        printf("usage: main.out <picture file="" path="">\n");
-        return -1;
-      }
-      Mat image;
-      image = imread( argv[1], 1 );
-      if ( !image.data )
-      {
-        printf("No image data \n");
-        return -1;
-      }
-      namedWindow("widndow", WINDOW_AUTOSIZE );
-      imshow("window", image);
-      waitKey(0);
-      return 0;
-    }</picture></stdio.h></p>
+####新建 cpp 文件</p>
+
+<pre><code>//main.cpp
+#include &lt;stdio.h&gt;
+#include &lt;opencv2/opencv.hpp&gt;
+using namespace cv;
+int main(int argc, char** argv )
+{
+  if ( argc != 2 )
+  {
+    printf("usage: main.out &lt;picture file path&gt;\n");
+    return -1;
+  }
+  Mat image;
+  image = imread( argv[1], 1 );
+  if ( !image.data )
+  {
+    printf("No image data \n");
+    return -1;
+  }
+  namedWindow("widndow", WINDOW_AUTOSIZE );
+  imshow("window", image);
+  waitKey(0);
+  return 0;
+}
+</code></pre>
 
 <h4 id="cmake-cmakeliststxt">编写 Cmake 文件（CMakeLists.txt）</h4>
 

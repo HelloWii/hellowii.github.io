@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>HelloWii的小窝</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//libs.cncdn.cn/highlight.js/8.4/styles/tomorrow.min.css">
+    <script src="//libs.cncdn.cn/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- CSS -->                       
+    <link rel="stylesheet" href="/statics/css/index.css">
+</head>
+
+<body>
+    
+    <div class="wrap">          
+    <!--HEADER-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?b69fc87384d967f73ccfbcffb2995a83";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<div class="header">
+    <div class="logo"> <a href="/index.html"><img src="/images/logo.png" alt=""></a> </div>
+    <div class="cssmenu">
+        <ul>
+            <li><a href="/index.html">HOME</a></li>       
+            <li><a href="/blog/">BLOG</a></li>
+            <li><a href="/lab/">LAB</a></li>
+            <li><a href="/about/">ABOUT</a></li>
+            <li><a href="http://hellowii.github.io">git</a></li>
+        </ul>
+    </div>
+    <div class="top-nav">
+        <nav class="clearfix">
+            <ul>
+                <li><a href="/index.html">HOME</a></li>
+                <li><a href="/blog/">BLOG</a></li>
+                <li><a href="/lab/">LAB</a></li>
+                <li><a href="/about/">ABOUT</a></li>
+                <li><a href="http://hellowii.github.io/cv/">git</a></li>
+            </ul>
+        <a href="#" id="pull">MENU</a> 
+        </nav>
+    </div>
+</div>
+    
+        <div id="container">
+    <div class="content">
+        <div class="page">
+            <div class="post-content">
+    <div class="title"><h1>Markdown 语法入门</h1></div>
+    <p class="post-date">Mar 6, 2016</p>
+                    
+     <p>Markdown 入门语法</p>
+
+<hr />
+
+<ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">简介</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">语法</a>    <ul>
+      <li><a href="#section-2" id="markdown-toc-section-2">1. 标题设置</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">2. 加粗</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">3. 斜体</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">4. 无序列表</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">5. 有序列表</a>        <ul>
+          <li><a href="#html" id="markdown-toc-html">关于列表的实现，也可以使用HTML标签</a></li>
+        </ul>
+      </li>
+      <li><a href="#blockquote" id="markdown-toc-blockquote">6. 块注释（blockquote）</a></li>
+      <li><a href="#links" id="markdown-toc-links">7. 链接（Links）</a></li>
+      <li><a href="#images" id="markdown-toc-images">8. 图片（Images）</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">9. 插入代码</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-8" id="markdown-toc-section-8">小结</a></li>
+</ul>
+
+<h3 id="section">简介</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>是一种简单的文本标记语言，通过间的标记就可以排版，有种类似写代码的感觉，不需要像word那样击排版，并且可以导出HTML文档。关于编辑器，可以去网上百度一下，也有一些在线的编辑器可以使用。</p>
+
+<p><a href="http://daringfireball.net/projects/markdown/">Markdown官方网站</a></p>
+
+<p><img src="http://7xrdfh.com1.z0.glb.clouddn.com/blog/ui/2016-03-06-markdown-1.png-HelloWii" alt="pic" /></p>
+
+<h3 id="section-1">语法</h3>
+
+<h4 id="section-2">1. 标题设置</h4>
+
+<p>两种方式：</p>
+
+<p>（1）通过“#”数量表示几级标题，最多6个。</p>
+
+<p>（2）通过在文字下方添加“=”和“-”，分别表示一级标题和二级标题。</p>
+
+<h4 id="section-3">2. 加粗</h4>
+
+<p>文字两端使用2个“*”或者“_”</p>
+
+<pre><code>**粗体**
+__粗体__
+</code></pre>
+
+<h4 id="section-4">3. 斜体</h4>
+
+<p>文字两端使用1个“*”或者“_”</p>
+
+<pre><code>*斜体*
+_斜体_
+</code></pre>
+
+<h4 id="section-5">4. 无序列表</h4>
+
+<p>*, +,  - 三个任意一个符号后面跟空客</p>
+
+<pre><code>- a
+- b
+- c
+</code></pre>
+
+<h4 id="section-6">5. 有序列表</h4>
+
+<p>使用数字后面跟上句号和空格）</p>
+
+<pre><code>- 1.a
+- 2.b
+- 3.c
+</code></pre>
+
+<h5 id="html">关于列表的实现，也可以使用HTML标签</h5>
+
+<h4 id="blockquote">6. 块注释（blockquote）</h4>
+
+<p>通过在文字开头添加“&gt;”表示块注释，当 &gt; 添加五个空格时，会呈现另一种效果。</p>
+
+<h4 id="links">7. 链接（Links）</h4>
+
+<p>Markdown中有两种方式：嵌方式和引用方式。</p>
+
+<pre><code>嵌入式方式：[第一个]（http://example.com）
+引用方式：[第二个][1]
+
+[1]: http://link1.com/        "link——1" 
+[2]: http://link2.com/         "linke-2"
+</code></pre>
+
+<h4 id="images">8. 图片（Images）</h4>
+
+<p>图片和链接基本相似，只是在前面加 ！ 。</p>
+
+<h4 id="section-7">9. 插入代码</h4>
+
+<p>实现方式有三种：</p>
+
+<p>（1） <code>引用</code>  将代引用的字体放在 两个 ` 中.TAB的上面那个符号。</p>
+
+<p>（2）使用Tab或者四个空格。</p>
+
+<p>（3）或者使用下面的</p>
+
+<p>一种不带行号：</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">代码</code></pre></div>
+
+<p>下面这一种显示代码行号</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> 代码</code></pre></div>
+
+<p><img src="http://7xrdfh.com1.z0.glb.clouddn.com/blog/ui/2016-03-06-markdown-2.png-HelloWii" alt="code" />
+####10.制表</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>item</th>
+      <th style="text-align: center">A</th>
+      <th style="text-align: right">B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td style="text-align: center">001</td>
+      <td style="text-align: right">cd</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td style="text-align: center">002</td>
+      <td style="text-align: right">ab</td>
+    </tr>
+  </tbody>
+</table>
+
+<pre><code>| item   |    A     |  B  |
+| ------ |:--------:| ---:|
+| 1      | 001      |   cd|
+| 2      | 002      |   ab|
+</code></pre>
+
+<h3 id="section-8">小结</h3>
+
+<p><code>Markdown 语法还是蛮简明的。写文章，有种写代码的感觉</code></p>
+
+
+                    
+    <ul class="pagination">
+        
+        
+         <li class="next">
+            <a href="/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/2016/03/07/%E6%B0%B4%E6%89%8B%E5%88%86%E6%A4%B0%E5%AD%90.html">Next</a>
+        </li>
+        
+    </ul>
+</div>
+
+            
+
+<div class="catalog-menu">
+    <h3>目&nbsp;&nbsp;录</h3>
+    <div class="catalog-menu-content"></div>
+</div>
+
+
+<div class="comment">
+    <span>Comments</span>
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="/ui%E7%9B%B8%E5%85%B3/2016/03/06/Markdown 语法入门" data-title="Markdown 语法入门" data-url="hellowii.github.io/ui%E7%9B%B8%E5%85%B3/2016/03/06/Markdown%20%E8%AF%AD%E6%B3%95%E5%85%A5%E9%97%A8.html"></div>
+    <!-- 多说评论框 end -->
+</div>
+
+
+
+                   
+        </div>       
+        
+    </div>
+</div>
+
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"hellowii"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+    
+        <!--回到顶部-->
+        <a id="returnTop"></a>
+
+    <!-- FOOTER -->
+<div class="footer" >
+    <p class="copyright">
+       	&copy; 
+        <span itemprop="copyrightYear">2016</span> 
+        <span itemprop="name">&nbsp;HelloWii&nbsp;&nbsp;&nbsp;QQ:574433742</span>
+	<br><br>
+    </p>
+</div>
+
+    </div>
+
+    <script src="/statics/js/jquery.min.js"></script>
+    <script src="/statics/js/index.js"></script>
+    
+
+</body>
+</html>
